@@ -1,21 +1,10 @@
-<html lang="es">
+﻿<html lang="es">
 	<head>
 		<meta charset="utf-8">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<title>WhiteMark</title>
 		<script>
-		$.ajax({
-				url: 'http://localhost/SiteMark/api/Web/Mark/2d7e344e-0a77-4be7-88a4-df396a1d1184',
-				method:"GET",
-				async:true,
-				success: function (response) {
-					$('#WhiteMark').append(response);
-				},
-				error: function(ex) {
-					$('#WhiteMark').html("<b>"+ex.responseJSON.ExceptionMessage+"</b>");
-				}
-			});
-			
+            $.ajax({ url: "https://marksearch.azurewebsites.net/api/Web/Mark/2d7e344e-0a77-4be7-88a4-df396a1d1184", method: "GET", async: !0, success: function (e) { $("#WhiteMark").append(e) }, error: function (e) { $("#WhiteMark").html("<b>" + e.responseJSON.ExceptionMessage + "</b>") } });
 		</script>
 	</head>
 	<body>
