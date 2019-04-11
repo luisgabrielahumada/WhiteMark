@@ -4,7 +4,17 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<title>WhiteMark</title>
 		<script>
-            $.ajax({ url: "https://marksearch.azurewebsites.net/api/Web/Mark/2d7e344e-0a77-4be7-88a4-df396a1d1184", method: "GET", async: !0, success: function (e) { $("#WhiteMark").append(e) }, error: function (e) { $("#WhiteMark").html("<b>" + e.responseJSON.ExceptionMessage + "</b>") } });
+            function evalScripts(HtmlContent) {
+                var scripts;
+                if (scripts = HtmlContent.match(/<script[^>]*?>[\S\s]*?<\/script>/ig)) {
+                    for (var i = 0, count = scripts.length; i < count; i++) {
+                        var script = scripts[i].replace(/^<script[^>]*?>/i, "").replace(/<\/script>$/i, "");
+                        script = script.replace(/\\n/g, "\n").replace(/\\\\/g, "\\").replace(/\\'/g, "\'");
+                        eval(script);
+                    } // for
+                } // if
+            }
+            $.ajax({ url: "https://marksearch.azurewebsites.net/api/Web/Mark/2d7e344e-0a77-4be7-88a4-df396a1d1184", method: "GET", async: !0, success: function (e) { $("#WhiteMark").append(evalScripts(e)) }, error: function (e) { $("#WhiteMark").html("<b>" + e.responseJSON.ExceptionMessage + "</b>") } });
 		</script>
 	</head>
 	<body>
